@@ -1,0 +1,15 @@
+.bannerQuiz {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-top: 69px;
+}
+
+.bannerQuiz img {
+}
+
+.quizText {
+    position: absolute;
+    font-size: 50px;
+
+}
