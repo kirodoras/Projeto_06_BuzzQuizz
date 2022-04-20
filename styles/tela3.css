@@ -1,0 +1,156 @@
+.tela-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 1085px;
+    max-width: 100%;
+
+    margin: 140px 0px 80px 0px; 
+    padding: 0px 17px 0px 17px;
+}
+
+.tela-3 h2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+
+    margin-bottom: 29px;
+}
+.tela-3 .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: 600px;
+    max-width: 100%;
+    min-height: 256px;
+    max-height: 100vh;
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    background: var(--cor-branco);
+    padding: 14px 15px 20px 15px;
+    margin-bottom: 85px;
+}
+
+.tela-3 input {
+    border: none;
+
+    width: 564px;
+    max-width: 100%;
+    height: 46px;
+
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top:  9px;
+}
+
+.tela-3 .main-button {
+    border: none;
+
+    width: 368.86px;
+    max-width: 100%;
+    height: 54px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+
+    background: var(--cor-red);
+    color: var(--cor-branco);
+    border-radius: 15px;
+}
+.tela-3 h3 , .tela-3 h4{
+    width: 600px;
+    max-width: 100%;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+
+    margin-left: 7px;
+}
+
+.tela-3 h4 {
+    margin: 27px 0px 13px 0px;
+}
+
+.quizz-feito, .quizz-feito img {
+    width: 500px;
+    max-width: 100%;
+    height: 266px;
+    
+    position: relative;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 45px;
+}
+
+.gradient{
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-radius: 5px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+}
+
+.quizz-feito h3 {
+    width: 90%;
+    position: absolute;
+    bottom: 7px;
+    left: 18px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+
+    color: var(--cor-branco);
+}
+
+.go-home {
+    border: none;
+    width: 219.64px;
+    height: 44px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+
+    background-color: var(--cor-background);
+    margin-top: 12px;
+    color: #818181;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 1100px){
+    .tela-3 {
+        padding: 0px;
+        margin-top: 106px;
+    }
+    .tela-3 .form {
+        margin-bottom: 29px;
+    }
+    .tela-3 .main-button {
+        width: 324px;
+        max-width: 100%;
+    }
+}
