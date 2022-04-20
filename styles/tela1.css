@@ -36,6 +36,7 @@ header {
 
     background-color: var(--cor-red);
     color: var(--cor-branco);
+    z-index: 1;
 }
 
 header h1 {

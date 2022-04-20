@@ -1,15 +1,92 @@
+.tela-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .bannerQuiz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    text-align: center;
-    color: white;
     margin-top: 69px;
+    width: 100vw;
+    color: white;
+    font-size: 23px;
 }
 
 .bannerQuiz img {
+    width: 100%;
+    height: 227px;
+    object-fit: cover;
 }
 
-.quizText {
+.bannerQuiz div {
     position: absolute;
-    font-size: 50px;
+    font-size: 39px;
+}
 
+.perguntaQuiz {
+    margin-top: 42px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "title title"
+                            "a1 a2"
+                            "a3 a4";
+    width: 759px;
+    background-color: white;
+    padding: 28px 36px;
+    box-shadow: 0 0 5px 5px #F4F4F4;
+    box-sizing: border-box;
+}
+
+.perguntaQuiz img {
+    width: 100%;
+}
+
+.enunciado {
+    overflow-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #434CA0;
+    font-weight: 700;
+    font-size: 23px;
+    color: white;
+    margin-top: 28px;
+    padding: 60px 25px;
+    grid-area: title;
+    text-align: center;
+}
+
+.alternativa div {
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 7px;
+}
+
+@media (max-width:759px) {
+    
+    .perguntaQuiz {
+        width: 100vw;
+        gap: 10px;
+    }
+
+    .bannerQuiz div {
+        font-size: 19px;
+    }
+
+    .alternativa div {
+        font-size: 13px;
+    }
+
+    .enunciado {
+        font-size: 19px;
+        padding: 20px 16px;
+    }
+
+    .bannerQuiz img {
+        height: 142px;
+    }
 }
