@@ -117,7 +117,24 @@
     padding: 30px 20px;
 }
 
-@media (max-width:759px) {
+.tela-2 .restart-button {
+    border: none;
+
+    width: 368.86px;
+    max-width: 100%;
+    height: 54px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+
+    background: var(--cor-red);
+    color: var(--cor-branco);
+    border-radius: 15px;
+}
+
+@media (max-width:1100px) {
 
     .perguntaQuiz {
         width: 100vw;
