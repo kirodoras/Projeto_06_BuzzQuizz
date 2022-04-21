@@ -15,7 +15,7 @@
     <header>
         <h1>BuzzQuizz</h1>
     </header>
-    <main class="tela-1 hidden">
+    <main class="tela-1">
         <section class="local-seus-quizzes ">
             <div class="header-seus-quizzes">
                 <h2>Seus Quizzes</h2>
@@ -42,7 +42,7 @@
             </ul>
         </section>
 
-        <section class="local-criar-quizz hidden">
+        <section class="local-criar-quizz">
             <h2>Você não criou nenhum <br> quizz ainda :( </h2>
             <button type="button">Criar Quizz</button>
         </section>
@@ -50,19 +50,6 @@
         <section class="local-todos-quizzes">
             <h2>Todos os Quizzes</h2>
             <ul class="todos-quizzes">
-                <li class="quizz">
-                    <img src="assets/Rectangle 34.png" alt="">
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
-                <li class="quizz">
-                    <img src="assets/download.jpeg" alt="">
-                    <div class="gradient"></div>
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
-                <li class="quizz">
-                    <img src="assets/Rectangle 34.png" alt="">
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
             </ul>
         </section>
     </main>
@@ -70,7 +57,7 @@
 
 
     <!--Tela 2 - Interface de perguntas e respostas-->
-    <main class="tela-2">
+    <main class="tela-2 hidden">
         <div class="bannerQuiz">
             <img src="assets_2/HarryPotter.png">
             <div>
@@ -123,7 +110,7 @@
     <!--END - Tela 2 - Interface de perguntas e respostas-->
 
     <!--Tela 2 -  resultado final do quiz-->
-    <main class="tela-2">
+    <main class="tela-2 hidden">
         <div class="resultado">
         <div class="mensagemPrincipal">
             88% de acerto: Você é praticamente um aluno de Hogwarts!
@@ -198,7 +185,7 @@
         <button type="button" class="go-home">Voltar pra home</button>
     </main>
     <!--END - Tela 3.4 - Sucesso do Quiz-->
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>
