@@ -119,3 +119,9 @@ function trocarDeTela(screen){
 
     return screen;
 }
+
+function openForm(elemento){
+
+}
+
+trocarDeTela(4);

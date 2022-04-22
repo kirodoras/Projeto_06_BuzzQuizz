@@ -125,7 +125,7 @@
 
 
     <!--Tela 3.1 Info básica do Quiz-->
-    <main class="tela-3 ">
+    <main class="tela-3">
         <h2>Comece pelo começo</h2>
         <section class="form">
             <input type="text" placeholder="Título do seu quizz" class="titulo"></input>
@@ -142,18 +142,38 @@
         <h2>Crie suas perguntas</h2>
         <section class="form">
             <h3>Pergunta 1</h3>
-            <input placeholder="Texto da pergunta"></input>
-            <input placeholder="Cor de fundo da pergunta"></input>
+            <input type="text" placeholder="Texto da pergunta"></input>
+            <input type="url" placeholder="Cor de fundo da pergunta"></input>
             <h4>Resposta correta</h4>
-            <input placeholder="Resposta correta"></input>
-            <input placeholder="URL da imagem"></input>
+            <input type="text" placeholder="Resposta correta"></input>
+            <input type="url" placeholder="URL da imagem"></input>
             <h4>Respostas incorretas</h4>
-            <input placeholder="Resposta incorreta 1"></input>
-            <input placeholder="URL da imagem 1"></input>
-            <input placeholder="Resposta incorreta 2"></input>
-            <input placeholder="URL da imagem 2"></input>
-            <input placeholder="Resposta incorreta 3"></input>
-            <input placeholder="URL da imagem 3"></input>
+            <input type="text" placeholder="Resposta incorreta 1"></input>
+            <input type="url" placeholder="URL da imagem 1"></input>
+            <input type="text" placeholder="Resposta incorreta 2"></input>
+            <input type="url" placeholder="URL da imagem 2"></input>
+            <input type="text" placeholder="Resposta incorreta 3"></input>
+            <input type="url" placeholder="URL da imagem 3"></input>
+        </section>
+        <section class="form">
+            <div class="form-header">
+                <h3>Pergunta 2</h3>
+                <ion-icon name="create-outline" onclick="openForm(this)"></ion-icon>
+            </div>
+            <div class="form-main">
+                <input type="text" placeholder="Texto da pergunta"></input>
+                <input type="url" placeholder="Cor de fundo da pergunta"></input>
+                <h4>Resposta correta</h4>
+                <input type="text" placeholder="Resposta correta"></input>
+                <input type="url" placeholder="URL da imagem"></input>
+                <h4>Respostas incorretas</h4>
+                <input type="text" placeholder="Resposta incorreta 1"></input>
+                <input type="url" placeholder="URL da imagem 1"></input>
+                <input type="text" placeholder="Resposta incorreta 2"></input>
+                <input type="url" placeholder="URL da imagem 2"></input>
+                <input type="text" placeholder="Resposta incorreta 3"></input>
+                <input type="url" placeholder="URL da imagem 3"></input>
+            </div>
         </section>
         <button type="button" class="main-button" onclick="getPerguntas()">Prosseguir pra criar níveis</button>
     </main>
@@ -185,8 +205,10 @@
         <button type="button" class="go-home">Voltar pra home</button>
     </main>
     <!--END - Tela 3.4 - Sucesso do Quiz-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="scripts/script.js"></script>
     <script src="scripts/script3.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
