@@ -15,7 +15,7 @@
     <header>
         <h1>BuzzQuizz</h1>
     </header>
-    <main class="tela-1">
+    <main class="tela-1 hidden">
         <section class="local-seus-quizzes ">
             <div class="header-seus-quizzes">
                 <h2>Seus Quizzes</h2>
@@ -124,18 +124,18 @@
     <!--END - Tela 2 - resultado final do quiz-->
 
 
-    <!--Info básica do Quiz-->
-    <main class="tela-3 hidden">
+    <!--Tela 3.1 Info básica do Quiz-->
+    <main class="tela-3 ">
         <h2>Comece pelo começo</h2>
         <section class="form">
-            <input placeholder="Título do seu quizz"></input>
-            <input placeholder="URL da imagem do seu quizz"></input>
-            <input placeholder="Quantidade de perguntas do quizz"></input>
-            <input placeholder="Quantidade de níveis do quizz"></input>
+            <input type="text" placeholder="Título do seu quizz" class="titulo"></input>
+            <input type="url" placeholder="URL da imagem do seu quizz" class="url-img"></input>
+            <input type="number" placeholder="Quantidade de perguntas do quizz" class="ask-qtd"></input>
+            <input type="number" placeholder="Quantidade de níveis do quizz" class="lvl-qtd"></input>
         </section>
-        <button type="button" class="main-button">Prosseguir pra criar perguntas</button>
+        <button type="button" class="main-button" onclick="getInfosBasicas()">Prosseguir pra criar perguntas</button>
     </main>
-    <!--END - Info básica do Quiz-->
+    <!--END - Tela 3.1 - Info básica do Quiz-->
 
     <!--Tela 3.2 - Perguntas do Quiz-->
     <main class="tela-3 hidden">
@@ -155,7 +155,7 @@
             <input placeholder="Resposta incorreta 3"></input>
             <input placeholder="URL da imagem 3"></input>
         </section>
-        <button type="button" class="main-button">Prosseguir pra criar níveis</button>
+        <button type="button" class="main-button" onclick="getPerguntas()">Prosseguir pra criar níveis</button>
     </main>
     <!--END - Tela 3.2 - Perguntas do Quiz-->
 
@@ -187,5 +187,6 @@
     <!--END - Tela 3.4 - Sucesso do Quiz-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts/script.js"></script>
+    <script src="scripts/script3.js"></script>
 </body>
 </html>
