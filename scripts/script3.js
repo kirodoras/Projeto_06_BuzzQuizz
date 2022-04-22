@@ -1,6 +1,6 @@
-let quizz =
+const meuQuizz =
 {
-	title: "Título do quizz",
+	title: "Título do quizz- Augusto sem net",
 	image: "https://http.cat/411.jpg",
 	questions: [
 		{
@@ -100,8 +100,8 @@ function getInfosBasicas() {
         return;
     }*/
 
-    quizz.title = infoTitulo.value;
-    quizz.image = infoUrlImg.value;
+    meuQuizz.title = infoTitulo.value;
+    meuQuizz.image = infoUrlImg.value;
 
     telaAtual = trocarDeTela(4);
     renderizarPerguntas();
@@ -185,15 +185,38 @@ function renderizarNiveis(){
     }
     localNiveis.innerHTML += `
         <button type="button" class="main-button" onclick="getNiveis()">
-            Prosseguir pra criar níveis
+            Finalizar Quizz
         </button>
         `
 }
 
 function getPerguntas(){
+    const perguntas = document.querySelector('.perguntas').querySelectorAll('.form');
     telaAtual = trocarDeTela(5);
 }
 
 function getNiveis(){
-    telaAtual = trocarDeTela(6);
+    const perguntas = document.querySelector('.niveis').querySelectorAll('.form');
+    /*telaAtual = trocarDeTela(6);*/
+    enviarQuizz();
 }
+
+function voltarHome(){
+    telaAtual = trocarDeTela(0);
+}
+
+function enviarQuizz(){
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes", meuQuizz);
+    promise.then(tratarSucesso);
+    promise.catch(tratarErro);
+}
+
+function tratarSucesso(resposta){
+    console.log(resposta.data);
+}
+
+function tratarErro(resposta){
+    console.log(resposta.data);
+}
+
+trocarDeTela(3);
