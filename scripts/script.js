@@ -29,6 +29,3 @@ function preencheContainerDeQuiz(classeDoContainer, arrayDeQuizzes) {
 
 getQuizzes();
 
-function soma (x,y){
-    return x+y;
-}
