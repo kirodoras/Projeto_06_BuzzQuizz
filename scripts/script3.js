@@ -77,7 +77,9 @@ let quizz =
 5: main.tela-3
 6: main.tela-3
 */
-
+ /*infoTitulo.value = '';
+    infoAskQtd.value = '';
+    infoLvlQtd.value = '';*/
 let telaAtual = 0;
 
 let infoTitulo = '';
@@ -92,19 +94,18 @@ function getInfosBasicas() {
     infoAskQtd = document.querySelector('input.ask-qtd');
     infoLvlQtd = document.querySelector('input.lvl-qtd');
 
-    if((infoTitulo.value.length < 20 || infoTitulo.value.length > 65) 
+    /*if((infoTitulo.value.length < 20 || infoTitulo.value.length > 65) 
         || (infoAskQtd.value < 3 || infoLvlQtd.value < 2)){
         alert('O Título do quizz deve ter no mínimo 20 e no máximo 65 caracteres \n');
-        /*infoTitulo.value = '';
-        infoAskQtd.value = '';
-        infoLvlQtd.value = '';*/
         return;
-    }
+    }*/
 
     quizz.title = infoTitulo.value;
     quizz.image = infoUrlImg.value;
 
     telaAtual = trocarDeTela(4);
+    renderizarPerguntas();
+    renderizarNiveis();
 }
 
 let telas = '';
@@ -121,7 +122,79 @@ function trocarDeTela(screen){
 }
 
 function openForm(elemento){
+    const parent = elemento.parentNode.parentNode;
+    const form = parent.querySelector('.form-main');
 
+    if(form.classList.contains('hidden')){
+        form.classList.remove('hidden');
+    }else {
+        form.classList.add('hidden');
+    }
 }
 
 trocarDeTela(0);
+function renderizarPerguntas(){
+    let localPerguntas = document.querySelector('.perguntas');
+    for(let i = 2; i <= infoAskQtd.value; i++){
+        localPerguntas.innerHTML += `
+        <section class="form">
+            <div class="form-header">
+                <h3>Pergunta ${i}</h3>
+                <ion-icon name="create-outline" onclick="openForm(this)"></ion-icon>
+            </div>
+            <div class="form-main hidden">
+                <input type="text" placeholder="Texto da pergunta"></input>
+                <input type="url" placeholder="Cor de fundo da pergunta"></input>
+                <h4>Resposta correta</h4>
+                <input type="text" placeholder="Resposta correta"></input>
+                <input type="url" placeholder="URL da imagem"></input>
+                <h4>Respostas incorretas</h4>
+                <input type="text" placeholder="Resposta incorreta 1"></input>
+                <input type="url" placeholder="URL da imagem 1"></input>
+                <input type="text" placeholder="Resposta incorreta 2"></input>
+                <input type="url" placeholder="URL da imagem 2"></input>
+                <input type="text" placeholder="Resposta incorreta 3"></input>
+                <input type="url" placeholder="URL da imagem 3"></input>
+            </div>
+        </section>
+        `
+    }
+    localPerguntas.innerHTML += `
+        <button type="button" class="main-button" onclick="getPerguntas()">
+            Prosseguir pra criar níveis
+        </button>
+        `
+}
+
+function renderizarNiveis(){
+    let localNiveis = document.querySelector('.niveis');
+    for(let i = 2; i <= infoLvlQtd.value; i++){
+        localNiveis.innerHTML += `
+        <section class="form">
+            <div class="form-header">
+                <h3>Nível ${i}</h3>
+                <ion-icon name="create-outline" onclick="openForm(this)"></ion-icon>
+            </div>
+            <div class="form-main hidden">
+                <input placeholder="Título do nível"></input>
+                <input placeholder="% de acerto mínima"></input>
+                <input placeholder="URL da imagem do nível"></input>
+                <input placeholder="Descrição do nível" class="level-description"></input>
+            </div>
+        </section>
+        `
+    }
+    localNiveis.innerHTML += `
+        <button type="button" class="main-button" onclick="getNiveis()">
+            Prosseguir pra criar níveis
+        </button>
+        `
+}
+
+function getPerguntas(){
+    telaAtual = trocarDeTela(5);
+}
+
+function getNiveis(){
+    telaAtual = trocarDeTela(6);
+}
