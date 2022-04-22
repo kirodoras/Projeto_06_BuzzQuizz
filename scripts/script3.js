@@ -124,4 +124,4 @@ function openForm(elemento){
 
 }
 
-trocarDeTela(4);
+trocarDeTela(0);

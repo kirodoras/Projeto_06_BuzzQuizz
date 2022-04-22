@@ -19,32 +19,15 @@
         <section class="local-seus-quizzes ">
             <div class="header-seus-quizzes">
                 <h2>Seus Quizzes</h2>
-                <button type="button">+</button>
+                <button type="button" onclick="trocarDeTela(3)">+</button>
             </div>
             <ul class="seus-quizzes">
-                <li class="quizz">
-                    <img src="assets/Rectangle 34.png" alt="">
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
-                <li class="quizz">
-                    <img src="assets/download.jpeg" alt="">
-                    <div class="gradient"></div>
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
-                <li class="quizz">
-                    <img src="assets/Rectangle 34.png" alt="">
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
-                <li class="quizz">
-                    <img src="assets/Rectangle 34.png" alt="">
-                    <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
-                </li>
             </ul>
         </section>
 
         <section class="local-criar-quizz">
             <h2>Você não criou nenhum <br> quizz ainda :( </h2>
-            <button type="button">Criar Quizz</button>
+            <button type="button" onclick="trocarDeTela(3)">Criar Quizz</button>
         </section>
 
         <section class="local-todos-quizzes">
@@ -58,31 +41,10 @@
 
     <!--Tela 2 - Interface de perguntas e respostas-->
     <main class="tela-2 hidden">
-        <div class="bannerQuiz">
-            <img src="assets_2/HarryPotter.png">
-            <div>
-                O quão Potterhead é você?
-            </div>
-        </div>
+
         <div class="perguntaQuiz">
             <div class="enunciado">
                 Em qual animal Olho-Tonto Moody transfigurou Malfoy?
-            </div>
-            <div class="alternativa incorrect unselected">
-                <img src="assets_2/cat.png">
-                <div>Gatíneo</div>
-            </div>
-            <div class="alternativa incorrect">
-                <img src="assets_2/cat.png">
-                <div>Gatíneo</div>
-            </div>
-            <div class="alternativa correct unselected">
-                <img src="assets_2/cat.png">
-                <div>Gatíneo</div>
-            </div>
-            <div class="alternativa correct">
-                <img src="assets_2/cat.png">
-                <div>Gatíneo</div>
             </div>
         </div>
         <div class="perguntaQuiz">
@@ -110,7 +72,7 @@
     <!--END - Tela 2 - Interface de perguntas e respostas-->
 
     <!--Tela 2 -  resultado final do quiz-->
-    <main class="tela-2 hidden">
+    <main class="tela-2 resultado hidden">
         <div class="resultado">
         <div class="mensagemPrincipal">
             88% de acerto: Você é praticamente um aluno de Hogwarts!
@@ -125,7 +87,7 @@
 
 
     <!--Tela 3.1 Info básica do Quiz-->
-    <main class="tela-3">
+    <main class="tela-3 hidden">
         <h2>Comece pelo começo</h2>
         <section class="form">
             <input type="text" placeholder="Título do seu quizz" class="titulo"></input>
@@ -210,5 +172,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts/script3.js"></script>
     <script src="scripts/script.js"></script>
+    <script src="scripts/script2.js"></script>
 </body>
 </html>
