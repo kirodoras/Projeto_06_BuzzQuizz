@@ -100,8 +100,8 @@ function getInfosBasicas() {
         return;
     }*/
 
-    meuQuizz.title = infoTitulo.value;
-    meuQuizz.image = infoUrlImg.value;
+    /*meuQuizz.title = infoTitulo.value;
+    meuQuizz.image = infoUrlImg.value;*/
 
     telaAtual = trocarDeTela(4);
     renderizarPerguntas();
@@ -132,6 +132,7 @@ function openForm(elemento){
     }
 }
 
+trocarDeTela(0);
 function renderizarPerguntas(){
     let localPerguntas = document.querySelector('.perguntas');
     for(let i = 2; i <= infoAskQtd.value; i++){
@@ -192,11 +193,13 @@ function renderizarNiveis(){
 
 function getPerguntas(){
     const perguntas = document.querySelector('.perguntas').querySelectorAll('.form');
+    console.log(perguntas);
     telaAtual = trocarDeTela(5);
 }
 
 function getNiveis(){
-    const perguntas = document.querySelector('.niveis').querySelectorAll('.form');
+    const niveis = document.querySelector('.niveis').querySelectorAll('.form');
+    console.log(niveis);
     /*telaAtual = trocarDeTela(6);*/
     enviarQuizz();
 }
