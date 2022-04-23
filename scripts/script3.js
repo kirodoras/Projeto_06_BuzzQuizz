@@ -77,9 +77,7 @@ const meuQuizz =
 5: main.tela-3
 6: main.tela-3
 */
- /*infoTitulo.value = '';
-    infoAskQtd.value = '';
-    infoLvlQtd.value = '';*/
+
 let telaAtual = 0;
 
 let infoTitulo = '';
@@ -93,15 +91,16 @@ function getInfosBasicas() {
     infoUrlImg = document.querySelector('input.url-img');
     infoAskQtd = document.querySelector('input.ask-qtd');
     infoLvlQtd = document.querySelector('input.lvl-qtd');
-
+    //filtro
     /*if((infoTitulo.value.length < 20 || infoTitulo.value.length > 65) 
-        || (infoAskQtd.value < 3 || infoLvlQtd.value < 2)){
-        alert('O Título do quizz deve ter no mínimo 20 e no máximo 65 caracteres \n');
+        || (infoAskQtd.value < 3 || infoLvlQtd.value < 2)
+        || !infoUrlImg.value.startsWith("https://")){
+        alert(`(1)O Título do quizz deve ter no mínimo 20 e no máximo 65 caracteres\n(2)URL da Imagem: deve ter formato de URL\n(3)Quantidade de perguntas: no mínimo 3 perguntas\n(4)Quantidade de níveis: no mínimo 2 níveis`);
         return;
-    }*/
-
-    /*meuQuizz.title = infoTitulo.value;
-    meuQuizz.image = infoUrlImg.value;*/
+    }
+    */
+    meuQuizz.title = infoTitulo.value;
+    meuQuizz.image = infoUrlImg.value;
 
     telaAtual = trocarDeTela(4);
     renderizarPerguntas();
@@ -132,7 +131,6 @@ function openForm(elemento){
     }
 }
 
-trocarDeTela(0);
 function renderizarPerguntas(){
     let localPerguntas = document.querySelector('.perguntas');
     for(let i = 2; i <= infoAskQtd.value; i++){
@@ -191,17 +189,76 @@ function renderizarNiveis(){
         `
 }
 
+let arrayInputs = [];
+
 function getPerguntas(){
     const perguntas = document.querySelector('.perguntas').querySelectorAll('.form');
-    console.log(perguntas);
+
+    for(let i = 0; i < perguntas.length; i++){
+        arrayInputs[i] = perguntas[i].querySelectorAll('input'); 
+    }
+    for(let i = 0; i < arrayInputs.length; i++){
+        meuQuizz.questions.push({
+            title: arrayInputs[i][0].value,
+            color: arrayInputs[i][1].value,
+                answers: [
+                {
+                    text: arrayInputs[i][2].value,
+                    image: arrayInputs[i][3].value,
+                    isCorrectAnswer: true
+                },
+                {
+                    text: arrayInputs[i][4].value,
+                    image: arrayInputs[i][5].value,
+                    isCorrectAnswer: false
+                },
+                {
+                    text: arrayInputs[i][6].value,
+                    image: arrayInputs[i][7].value,
+                    isCorrectAnswer: false
+                },
+                {
+                    text: arrayInputs[i][8].value,
+                    image: arrayInputs[i][9].value,
+                    isCorrectAnswer: false
+                }]
+            });
+    }
+    console.log(meuQuizz.questions);
     telaAtual = trocarDeTela(5);
 }
 
+let arrayInputsNiveis = [];
 function getNiveis(){
     const niveis = document.querySelector('.niveis').querySelectorAll('.form');
-    console.log(niveis);
-    /*telaAtual = trocarDeTela(6);*/
-    enviarQuizz();
+
+    for(let i = 0; i < niveis.length; i++){
+        arrayInputsNiveis[i] = niveis[i].querySelectorAll('input'); 
+    }
+    for(let i = 0; i < arrayInputsNiveis.length; i++){
+        meuQuizz.levels.push({
+            title: arrayInputsNiveis[i][0].value,
+            image: arrayInputsNiveis[i][2].value,
+            text: arrayInputsNiveis[i][3].value,
+            minValue: arrayInputsNiveis[i][1].value
+        });
+    }
+    console.log(meuQuizz.levels);
+    telaAtual = trocarDeTela(6);
+    sucessoDoQuizz();
+    //enviarQuizz();
+}
+
+function sucessoDoQuizz(){
+    const quizzFeito = document.querySelector('.quizz-feito');
+
+    if(telaAtual === 6) {
+        quizzFeito.innerHTML += `
+            <img src="${meuQuizz.image}" alt="">
+            <div class="gradient"></div>
+            <h3>${meuQuizz.title}</h3>
+        `;
+    }
 }
 
 function voltarHome(){
@@ -222,4 +279,4 @@ function tratarErro(resposta){
     console.log(resposta.data);
 }
 
-trocarDeTela(3);
+trocarDeTela(0);
