@@ -222,4 +222,4 @@ function tratarErro(resposta){
     console.log(resposta.data);
 }
 
-trocarDeTela(3);
+//trocarDeTela(3);

@@ -1,6 +1,7 @@
 let arrayQuizzesServidor;
 
 
+
 //Busca todos os quizzes no Servidor, e armazena o  array obtido na variável global "arrayQuizzesServidor"
 function getQuizzes() {
     const quizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
