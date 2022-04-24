@@ -96,7 +96,7 @@ function checarSeJogoAcabou () {
     const numeroTotalDePerguntas = quizClicado.questions.length;
     if(numeroDePerguntasRespondidas === numeroTotalDePerguntas) {
         console.log("Acabou o jogo!");
-        console.log(`${quantidadeAcertos()} acertos`)
+        calculaNivel();
         return true;
     }
     else {
@@ -104,9 +104,21 @@ function checarSeJogoAcabou () {
     }
 }
 
-function quantidadeAcertos() {
-    const acertos = document.querySelectorAll(".selected.correct").length;
-    return acertos;
+function calculaPontuacao() {
+    const numeroAcertos = document.querySelectorAll(".selected.correct").length;
+    const numeroQuestoes =  quizClicado.questions.length;
+    const porcentagemAcertos = Math.ceil((numeroAcertos/numeroQuestoes)*100);
+    console.log(`${porcentagemAcertos}%`)
+    return porcentagemAcertos;
+}
+
+function calculaNivel() {
+    const pontuacao = calculaPontuacao();
+    const niveisConquistados = quizClicado.levels.filter(nivel => nivel.minValue <= pontuacao);
+    const ordemDescrescente = niveisConquistados.sort((a,b) => b.minValue - a.minValue);
+    const nivelMaximoAlcancado = ordemDescrescente[0];
+    console.log(nivelMaximoAlcancado);
+    return nivelMaximoAlcancado;
 }
 
 
