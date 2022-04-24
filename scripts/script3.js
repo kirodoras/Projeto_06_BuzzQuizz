@@ -131,9 +131,19 @@ let arrayInputs = [];
 
 function getPerguntas(){
     const perguntas = document.querySelector('.perguntas').querySelectorAll('.form');
-
+    meuQuizz.questions = [];
     for(let i = 0; i < perguntas.length; i++){
         arrayInputs[i] = perguntas[i].querySelectorAll('input'); 
+    }
+    for(let i = 0; i < arrayInputs.length; i++){
+        if(arrayInputs[i][0].value.length < 20 ||
+            arrayInputs[i][2].value === "" ||
+            arrayInputs[i][4].value === "" ||
+            !arrayInputs[i][3].value.startsWith("https://") ||
+            !arrayInputs[i][5].value.startsWith("https://")){
+                printTelaError();
+                return;
+        }
     }
     for(let i = 0; i < arrayInputs.length; i++){
         meuQuizz.questions.push({
@@ -151,20 +161,25 @@ function getPerguntas(){
                     isCorrectAnswer: false
                 }]
             });
-        meuQuizz.questions[i].answers.push({
-                text: arrayInputs[i][6].value,
-                image: arrayInputs[i][7].value,
-                isCorrectAnswer: false
-            });
-        meuQuizz.questions[i].answers.push(
-            {
-                text: arrayInputs[i][8].value,
-                image: arrayInputs[i][9].value,
-                isCorrectAnswer: false
-            });
+        if(!(arrayInputs[i][6].value === "") &&
+            arrayInputs[i][7].value.startsWith("https://")){
+                meuQuizz.questions[i].answers.push({
+                    text: arrayInputs[i][6].value,
+                    image: arrayInputs[i][7].value,
+                    isCorrectAnswer: false
+                });
+            }
+        if(!(arrayInputs[i][8].value === "") &&
+            arrayInputs[i][9].value.startsWith("https://")){
+                meuQuizz.questions[i].answers.push({
+                        text: arrayInputs[i][8].value,
+                        image: arrayInputs[i][9].value,
+                        isCorrectAnswer: false
+                    });
+            }
     }
     console.log(meuQuizz.questions);
-    telaAtual = trocarDeTela(5);
+    //telaAtual = trocarDeTela(5);
 }
 
 let arrayInputsNiveis = [];
