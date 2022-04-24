@@ -1,71 +1,9 @@
 const meuQuizz =
 {
-	title: "Título do quizz- Augusto sem net",
-	image: "https://http.cat/411.jpg",
-	questions: [
-		{
-			title: "Título da pergunta 1",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		},
-		{
-			title: "Título da pergunta 2",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		},
-		{
-			title: "Título da pergunta 3",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		}
-	],
-	levels: [
-		{
-			title: "Título do nível 1",
-			image: "https://http.cat/411.jpg",
-			text: "Descrição do nível 1",
-			minValue: 0
-		},
-		{
-			title: "Título do nível 2",
-			image: "https://http.cat/412.jpg",
-			text: "Descrição do nível 2",
-			minValue: 50
-		}
-	]
+	title: "",
+	image: "",
+	questions: [],
+	levels: []
 };
 
 /*
@@ -175,7 +113,7 @@ function renderizarNiveis(){
             </div>
             <div class="form-main hidden">
                 <input placeholder="Título do nível"></input>
-                <input placeholder="% de acerto mínima"></input>
+                <input type="number" placeholder="% de acerto mínima"></input>
                 <input placeholder="URL da imagem do nível"></input>
                 <input placeholder="Descrição do nível" class="level-description"></input>
             </div>
@@ -211,17 +149,18 @@ function getPerguntas(){
                     text: arrayInputs[i][4].value,
                     image: arrayInputs[i][5].value,
                     isCorrectAnswer: false
-                },
-                {
-                    text: arrayInputs[i][6].value,
-                    image: arrayInputs[i][7].value,
-                    isCorrectAnswer: false
-                },
-                {
-                    text: arrayInputs[i][8].value,
-                    image: arrayInputs[i][9].value,
-                    isCorrectAnswer: false
                 }]
+            });
+        meuQuizz.questions[i].answers.push({
+                text: arrayInputs[i][6].value,
+                image: arrayInputs[i][7].value,
+                isCorrectAnswer: false
+            });
+        meuQuizz.questions[i].answers.push(
+            {
+                text: arrayInputs[i][8].value,
+                image: arrayInputs[i][9].value,
+                isCorrectAnswer: false
             });
     }
     console.log(meuQuizz.questions);
@@ -229,19 +168,36 @@ function getPerguntas(){
 }
 
 let arrayInputsNiveis = [];
+let arrayAcertoMinimo = [];
 function getNiveis(){
     const niveis = document.querySelector('.niveis').querySelectorAll('.form');
-
+    arrayAcertoMinimo = [];
     for(let i = 0; i < niveis.length; i++){
         arrayInputsNiveis[i] = niveis[i].querySelectorAll('input'); 
     }
     for(let i = 0; i < arrayInputsNiveis.length; i++){
-        meuQuizz.levels.push({
-            title: arrayInputsNiveis[i][0].value,
-            image: arrayInputsNiveis[i][2].value,
-            text: arrayInputsNiveis[i][3].value,
-            minValue: arrayInputsNiveis[i][1].value
-        });
+        if(arrayInputsNiveis[i][0].value.length < 10 ||
+            Number(arrayInputsNiveis[i][1].value) < 0 ||
+            Number(arrayInputsNiveis[i][1].value) > 100 ||
+            !arrayInputsNiveis[i][2].value.startsWith("https://") ||
+            arrayInputsNiveis[i][3].value.length < 30){
+                printTelaError();
+                return;
+            }
+        arrayAcertoMinimo.push(Number(arrayInputsNiveis[i][1].value));
+    }
+    if(temZero(arrayAcertoMinimo)){
+        for(let i = 0; i < arrayInputsNiveis.length; i++){
+            meuQuizz.levels.push({
+                title: arrayInputsNiveis[i][0].value,
+                image: arrayInputsNiveis[i][2].value,
+                text: arrayInputsNiveis[i][3].value,
+                minValue: Number(arrayInputsNiveis[i][1].value)
+            });
+        }
+    }else {
+        printTelaError();
+        return;
     }
     console.log(meuQuizz.levels);
     telaAtual = trocarDeTela(6);
@@ -279,5 +235,15 @@ function tratarErro(resposta){
     console.log(resposta.data);
 }
 
-//trocarDeTela(3);
-trocarDeTela(0);
+function printTelaError(){
+    alert('Erro, confira os dados');
+}
+
+function temZero(arr){
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i] === 0) return true;
+    }
+    return false;
+}
+
+trocarDeTela(3);
