@@ -123,18 +123,16 @@ function calculaNivel() {
 
 function imprimeResultadoQuiz() {
     const nivel = calculaNivel();
-    const containerResultado = document.querySelector(".tela-2.resultado");
-    containerResultado.innerHTML = "";
-    containerResultado.innerHTML = `<div class="resultado">
+    const containerResultado = document.querySelector(".tela-2");
+    containerResultado.innerHTML += `<div class="resultado">
                                         <div class="mensagemPrincipal">
                                             ${nivel.title}
                                         </div>
                                         <img src=${nivel.image}>
                                         <h2>${nivel.text}</h2>
                                     </div>
-                                    <button type="button" class="restart-button">Reiniciar Quizz</button>
-                                    <button type="button" class="go-home">Voltar pra home</button>`
-    trocarDeTela(2);
+    <button type="button" class="main-button" onclick="executaQuiz(quizClicado.id)">Reiniciar Quizz</button>
+    <button type="button" class="go-home" onclick="voltarHome()">Voltar pra home</button>`
 }
 
 
