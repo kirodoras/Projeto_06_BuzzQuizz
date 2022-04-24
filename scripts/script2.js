@@ -46,9 +46,17 @@ function concatenaAlternativas(pergunta) {
 }
 
 function trataRespostaClicada(alternativaClicada) {
-    highlightAlternativaSelecionada(alternativaClicada);
-    const objetoPergunta = retornaObjetoPergunta(alternativaClicada);
-    revelaAlternativaCorreta(objetoPergunta,alternativaClicada);
+    const divPergunta = alternativaClicada.parentNode;
+    if(!divPergunta.classList.contains("respondida")) {
+        highlightAlternativaSelecionada(alternativaClicada);
+        const objetoPergunta = retornaObjetoPergunta(alternativaClicada);
+        revelaAlternativaCorreta(objetoPergunta,alternativaClicada);
+        divPergunta.classList.add("respondida");
+        checarSeJogoAcabou();
+    }
+    else {
+        console.log("Você já respondeu essa questão!")
+    }
 }
 
 function highlightAlternativaSelecionada(alternativaClicada) {
@@ -82,6 +90,26 @@ function revelaAlternativaCorreta(objetoPergunta,alternativaClicada) {
         }
     }
 }
+
+function checarSeJogoAcabou () {
+    const numeroDePerguntasRespondidas = document.querySelectorAll(".respondida").length;
+    const numeroTotalDePerguntas = quizClicado.questions.length;
+    if(numeroDePerguntasRespondidas === numeroTotalDePerguntas) {
+        console.log("Acabou o jogo!");
+        console.log(`${quantidadeAcertos()} acertos`)
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function quantidadeAcertos() {
+    const acertos = document.querySelectorAll(".selected.correct").length;
+    return acertos;
+}
+
+
 
 
 function shuffleFunction() { 
