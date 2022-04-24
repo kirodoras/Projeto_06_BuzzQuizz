@@ -1,11 +1,14 @@
 let quizClicado;
+let contadorDeRespostasUsuario;
 
 function executaQuiz(quizId) {
+    contadorDeRespostasUsuario = 0;
     quizClicado = arrayQuizzesServidor.find(quiz => quiz.id === quizId);
     insereBannerQuiz(quizClicado);
     embaralhaQuiz();
     quizClicado.questions.forEach(inserePerguntaNaTela);
     trocarDeTela(1);
+    scrollAutomatico();
 }
 
 function embaralhaQuiz() {
@@ -54,6 +57,7 @@ function trataRespostaClicada(alternativaClicada) {
         revelaAlternativaCorreta(objetoPergunta,alternativaClicada);
         divPergunta.classList.add("respondida");
         checarSeJogoAcabou();
+        scrollAutomatico();
     }
     else {
         console.log("Você já respondeu essa questão!")
@@ -136,6 +140,20 @@ function imprimeResultadoQuiz() {
     <button type="button" class="go-home" onclick="voltarHome()">Voltar pra home</button>`
 }
 
+function scrollAutomatico() {
+    const enunciados = document.querySelectorAll(".enunciado");
+    const numeroQuestoes = enunciados.length;
+    if(contadorDeRespostasUsuario < numeroQuestoes) {
+        enunciados[contadorDeRespostasUsuario].scrollIntoView({block: "center", behavior: "smooth"});
+        console.log(`Indo para pergunta ${contadorDeRespostasUsuario}`)
+        contadorDeRespostasUsuario++;
+    }
+    else if(contadorDeRespostasUsuario === enunciados.length) {
+        const resultado = document.querySelector(".resultado");
+        console.log("scrollando para os resultados")
+        resultado.scrollIntoView({block: "center", behavior: "smooth"});
+    }
+}
 
 function shuffleFunction() { 
 	return Math.random() - 0.5; 
