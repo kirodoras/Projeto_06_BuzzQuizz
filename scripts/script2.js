@@ -96,7 +96,7 @@ function checarSeJogoAcabou () {
     const numeroTotalDePerguntas = quizClicado.questions.length;
     if(numeroDePerguntasRespondidas === numeroTotalDePerguntas) {
         console.log("Acabou o jogo!");
-        calculaNivel();
+        imprimeResultadoQuiz();
         return true;
     }
     else {
@@ -121,7 +121,21 @@ function calculaNivel() {
     return nivelMaximoAlcancado;
 }
 
-
+function imprimeResultadoQuiz() {
+    const nivel = calculaNivel();
+    const containerResultado = document.querySelector(".tela-2.resultado");
+    containerResultado.innerHTML = "";
+    containerResultado.innerHTML = `<div class="resultado">
+                                        <div class="mensagemPrincipal">
+                                            ${nivel.title}
+                                        </div>
+                                        <img src=${nivel.image}>
+                                        <h2>${nivel.text}</h2>
+                                    </div>
+                                    <button type="button" class="restart-button">Reiniciar Quizz</button>
+                                    <button type="button" class="go-home">Voltar pra home</button>`
+    trocarDeTela(2);
+}
 
 
 function shuffleFunction() { 
