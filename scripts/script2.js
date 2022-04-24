@@ -1,11 +1,14 @@
 let quizClicado;
+let contadorDeRespostasUsuario;
 
 function executaQuiz(quizId) {
+    contadorDeRespostasUsuario = 0;
     quizClicado = arrayQuizzesServidor.find(quiz => quiz.id === quizId);
     insereBannerQuiz(quizClicado);
     embaralhaQuiz();
     quizClicado.questions.forEach(inserePerguntaNaTela);
     trocarDeTela(1);
+    scrollAutomatico();
 }
 
 function embaralhaQuiz() {
@@ -16,7 +19,8 @@ function insereBannerQuiz(quiz) {
     const containerTela2 = document.querySelector(".tela-2");
     containerTela2.innerHTML = `<div class="bannerQuiz">
                                     <img src="${quiz.image}">
-                                    <div>
+                                    <div class="mascaraBanner"></div>
+                                    <div class="tituloBanner">
                                         ${quiz.title}
                                     </div>
                                 </div>`
@@ -26,7 +30,7 @@ function inserePerguntaNaTela(pergunta) {
     const alternativas = concatenaAlternativas(pergunta);
     const containerTela2 = document.querySelector(".tela-2");
     containerTela2.innerHTML += `<div class="perguntaQuiz">
-                                    <div class="enunciado">
+                                    <div class="enunciado" style="background-color:${pergunta.color}">
                                         ${pergunta.title}
                                     </div>
                                     ${alternativas}
@@ -53,6 +57,7 @@ function trataRespostaClicada(alternativaClicada) {
         revelaAlternativaCorreta(objetoPergunta,alternativaClicada);
         divPergunta.classList.add("respondida");
         checarSeJogoAcabou();
+        setTimeout(scrollAutomatico, 1000);
     }
     else {
         console.log("Você já respondeu essa questão!")
@@ -123,20 +128,32 @@ function calculaNivel() {
 
 function imprimeResultadoQuiz() {
     const nivel = calculaNivel();
-    const containerResultado = document.querySelector(".tela-2.resultado");
-    containerResultado.innerHTML = "";
-    containerResultado.innerHTML = `<div class="resultado">
+    const containerResultado = document.querySelector(".tela-2");
+    containerResultado.innerHTML += `<div class="resultado">
                                         <div class="mensagemPrincipal">
                                             ${nivel.title}
                                         </div>
                                         <img src=${nivel.image}>
                                         <h2>${nivel.text}</h2>
                                     </div>
-                                    <button type="button" class="restart-button">Reiniciar Quizz</button>
-                                    <button type="button" class="go-home">Voltar pra home</button>`
-    trocarDeTela(2);
+    <button type="button" class="main-button" onclick="executaQuiz(quizClicado.id)">Reiniciar Quizz</button>
+    <button type="button" class="go-home" onclick="voltarHome()">Voltar pra home</button>`
 }
 
+function scrollAutomatico() {
+    const enunciados = document.querySelectorAll(".enunciado");
+    const numeroQuestoes = enunciados.length;
+    if(contadorDeRespostasUsuario < numeroQuestoes) {
+        enunciados[contadorDeRespostasUsuario].scrollIntoView({block: "center", behavior: "smooth"});
+        console.log(`Indo para pergunta ${contadorDeRespostasUsuario}`)
+        contadorDeRespostasUsuario++;
+    }
+    else if(contadorDeRespostasUsuario === enunciados.length) {
+        const resultado = document.querySelector(".resultado");
+        console.log("scrollando para os resultados")
+        resultado.scrollIntoView({block: "center", behavior: "smooth"});
+    }
+}
 
 function shuffleFunction() { 
 	return Math.random() - 0.5; 
