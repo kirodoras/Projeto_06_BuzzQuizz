@@ -16,7 +16,8 @@ function insereBannerQuiz(quiz) {
     const containerTela2 = document.querySelector(".tela-2");
     containerTela2.innerHTML = `<div class="bannerQuiz">
                                     <img src="${quiz.image}">
-                                    <div>
+                                    <div class="mascaraBanner"></div>
+                                    <div class="tituloBanner">
                                         ${quiz.title}
                                     </div>
                                 </div>`
@@ -26,7 +27,7 @@ function inserePerguntaNaTela(pergunta) {
     const alternativas = concatenaAlternativas(pergunta);
     const containerTela2 = document.querySelector(".tela-2");
     containerTela2.innerHTML += `<div class="perguntaQuiz">
-                                    <div class="enunciado">
+                                    <div class="enunciado" style="background-color:${pergunta.color}">
                                         ${pergunta.title}
                                     </div>
                                     ${alternativas}
