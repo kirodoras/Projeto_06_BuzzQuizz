@@ -47,7 +47,7 @@ function getInfosBasicas() {
     meuQuizz.title = infoTitulo.value;
     meuQuizz.image = infoUrlImg.value;
 
-    telaAtual = trocarDeTela(4);
+    telaAtual = trocarDeTela(3);
     renderizarPerguntas();
     renderizarNiveis();
 }
@@ -193,7 +193,7 @@ function getPerguntas(){
             }
     }
     console.log(meuQuizz.questions);
-    telaAtual = trocarDeTela(5);
+    telaAtual = trocarDeTela(4);
 }
 
 let arrayInputsNiveis = [];
@@ -230,14 +230,14 @@ function getNiveis(){
         return;
     }
     console.log(meuQuizz.levels);
-    telaAtual = trocarDeTela(6);
+    telaAtual = trocarDeTela(5);
     enviarQuizz();
 }
 
 function sucessoDoQuizz(){
     const quizzFeito = document.querySelector('.quizz-feito');
 
-    if(telaAtual === 6) {
+    if(telaAtual === 5) {
         quizzFeito.innerHTML += `
             <img src="${meuQuizz.image}" alt="">
             <div class="gradient"></div>
