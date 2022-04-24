@@ -1,4 +1,4 @@
-const meuQuizz =
+let meuQuizz =
 {
 	title: "",
 	image: "",
@@ -29,14 +29,21 @@ function getInfosBasicas() {
     infoUrlImg = document.querySelector('input.url-img');
     infoAskQtd = document.querySelector('input.ask-qtd');
     infoLvlQtd = document.querySelector('input.lvl-qtd');
-    //filtro
-    /*if((infoTitulo.value.length < 20 || infoTitulo.value.length > 65) 
+    meuQuizz =
+    {
+        title: "",
+        image: "",
+        questions: [],
+        levels: []
+    };
+
+    if((infoTitulo.value.length < 20 || infoTitulo.value.length > 65) 
         || (infoAskQtd.value < 3 || infoLvlQtd.value < 2)
         || !infoUrlImg.value.startsWith("https://")){
         alert(`(1)O Título do quizz deve ter no mínimo 20 e no máximo 65 caracteres\n(2)URL da Imagem: deve ter formato de URL\n(3)Quantidade de perguntas: no mínimo 3 perguntas\n(4)Quantidade de níveis: no mínimo 2 níveis`);
         return;
     }
-    */
+
     meuQuizz.title = infoTitulo.value;
     meuQuizz.image = infoUrlImg.value;
 
@@ -132,6 +139,7 @@ let arrayInputs = [];
 function getPerguntas(){
     const perguntas = document.querySelector('.perguntas').querySelectorAll('.form');
     meuQuizz.questions = [];
+    arrayInputs = [];
     for(let i = 0; i < perguntas.length; i++){
         arrayInputs[i] = perguntas[i].querySelectorAll('input'); 
     }
@@ -140,9 +148,15 @@ function getPerguntas(){
             arrayInputs[i][2].value === "" ||
             arrayInputs[i][4].value === "" ||
             !arrayInputs[i][3].value.startsWith("https://") ||
-            !arrayInputs[i][5].value.startsWith("https://")){
+            !arrayInputs[i][5].value.startsWith("https://") ||
+            !arrayInputs[i][1].value.startsWith("#") ||
+            !(arrayInputs[i][1].value.length === 7)){
                 printTelaError();
                 return;
+        }
+        if(!verificaCor(arrayInputs[i][1].value)){
+            alert(`Erro no formato das cores\nDeve ser uma cor em hexadecimal (começar em "#", seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F)`);
+            return;
         }
     }
     for(let i = 0; i < arrayInputs.length; i++){
@@ -187,6 +201,7 @@ let arrayAcertoMinimo = [];
 function getNiveis(){
     const niveis = document.querySelector('.niveis').querySelectorAll('.form');
     arrayAcertoMinimo = [];
+    arrayInputsNiveis = [];
     for(let i = 0; i < niveis.length; i++){
         arrayInputsNiveis[i] = niveis[i].querySelectorAll('input'); 
     }
@@ -216,8 +231,7 @@ function getNiveis(){
     }
     console.log(meuQuizz.levels);
     telaAtual = trocarDeTela(6);
-    sucessoDoQuizz();
-    //enviarQuizz();
+    enviarQuizz();
 }
 
 function sucessoDoQuizz(){
@@ -243,6 +257,7 @@ function enviarQuizz(){
 }
 
 function tratarSucesso(resposta){
+    sucessoDoQuizz();
     console.log(resposta.data);
 }
 
@@ -261,4 +276,17 @@ function temZero(arr){
     return false;
 }
 
-trocarDeTela(3);
+function verificaCor(str){
+    let arr = [];
+    const hex = ['1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','a','b','c','d','e','f'];
+    for(let i = 0; i < str.length; i++){
+        arr[i] = str[i];
+    }
+    arr.shift();
+    for(let i = 0; i < arr.length; i++){
+      if(!hex.includes(arr[i])) return false;
+    }
+    return true;
+}
+
+trocarDeTela(0);
