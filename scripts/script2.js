@@ -57,7 +57,7 @@ function trataRespostaClicada(alternativaClicada) {
         revelaAlternativaCorreta(objetoPergunta,alternativaClicada);
         divPergunta.classList.add("respondida");
         checarSeJogoAcabou();
-        scrollAutomatico();
+        setTimeout(scrollAutomatico, 1000);
     }
     else {
         console.log("Você já respondeu essa questão!")
