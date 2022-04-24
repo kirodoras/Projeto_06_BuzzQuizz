@@ -3,6 +3,7 @@ let quizClicado;
 function executaQuiz(quizId) {
     quizClicado = arrayQuizzesServidor.find(quiz => quiz.id === quizId);
     insereBannerQuiz(quizClicado);
+    embaralhaQuiz();
     quizClicado.questions.forEach(inserePerguntaNaTela);
     trocarDeTela(1);
 }
