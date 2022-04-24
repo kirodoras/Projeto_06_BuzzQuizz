@@ -193,7 +193,7 @@ function getPerguntas(){
             }
     }
     console.log(meuQuizz.questions);
-    //telaAtual = trocarDeTela(5);
+    telaAtual = trocarDeTela(5);
 }
 
 let arrayInputsNiveis = [];
