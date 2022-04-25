@@ -48,12 +48,26 @@ function trocaDeSection (){
     let localCriar = document.querySelector(".local-criar-quizz");
 
     if(localSeus.innerHTML === ""){
+        localStorage.clear();
         localCriar.classList.remove('hidden');
         localSeus.parentNode.classList.add('hidden');
     }else {
         localCriar.classList.add('hidden');
         localSeus.parentNode.classList.remove('hidden');
     }
+}
+
+let telas = '';
+function trocarDeTela(screen){
+    telas = document.querySelectorAll('main');
+    
+    for(let i = 0; i < telas.length; i++){
+        telas[i].classList.add('hidden');
+    }
+
+    telas[screen].classList.remove('hidden');
+
+    return screen;
 }
 
 //localStorage.clear()

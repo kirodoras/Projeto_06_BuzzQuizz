@@ -120,19 +120,6 @@ function getInfosBasicas() {
     renderizarNiveis();
 }
 
-let telas = '';
-function trocarDeTela(screen){
-    telas = document.querySelectorAll('main');
-    
-    for(let i = 0; i < telas.length; i++){
-        telas[i].classList.add('hidden');
-    }
-
-    telas[screen].classList.remove('hidden');
-
-    return screen;
-}
-
 function openForm(elemento){
     const parent = elemento.parentNode.parentNode;
     const form = parent.querySelector('.form-main');
@@ -305,18 +292,22 @@ function getNiveis(){
 function sucessoDoQuizz(){
     const quizzFeito = document.querySelector('.quizz-feito');
 
-    if(telaAtual === 5) {
-        quizzFeito.innerHTML += `
-            <img src="${meuQuizz.image}" alt="">
-            <div class="gradient"></div>
-            <h3>${meuQuizz.title}</h3>
-        `;
-    }
+    quizzFeito.innerHTML += `
+        <img src="${meuQuizz.image}" alt="">
+        <div class="gradient"></div>
+        <h3>${meuQuizz.title}</h3>
+    `;
+
 }
 
 function voltarHome(){
     telaAtual = trocarDeTela(0);
     getQuizzes();
+}
+
+let id = 0;
+function acessarQuizz(){
+    if(id != 0) executaQuiz(id);
 }
 
 function enviarQuizz(){
@@ -329,6 +320,7 @@ function tratarSucesso(resposta){
     sucessoDoQuizz();
     getQuizzes();
     sendStorage(resposta.data.id);
+    id = resposta.data.id;
 }
 
 function tratarErro(resposta){
