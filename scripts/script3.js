@@ -7,7 +7,7 @@ let meuQuizz =
 };
 
 let testeQuizz = {
-	title: "Título do quizz",
+	title: "Título do quizz - ALoaloalo",
 	image: "https://http.cat/411.jpg",
 	questions: [
 		{
@@ -107,7 +107,7 @@ function getInfosBasicas() {
 
     if((infoTitulo.value.length < 20 || infoTitulo.value.length > 65) 
         || (infoAskQtd.value < 3 || infoLvlQtd.value < 2)
-        || !infoUrlImg.value.startsWith("https://")){
+        || !infoUrlImg.value.startsWith("http")){
         alert(`(1)O Título do quizz deve ter no mínimo 20 e no máximo 65 caracteres\n(2)URL da Imagem: deve ter formato de URL\n(3)Quantidade de perguntas: no mínimo 3 perguntas\n(4)Quantidade de níveis: no mínimo 2 níveis`);
         return;
     }
@@ -215,8 +215,8 @@ function getPerguntas(){
         if(arrayInputs[i][0].value.length < 20 ||
             arrayInputs[i][2].value === "" ||
             arrayInputs[i][4].value === "" ||
-            !arrayInputs[i][3].value.startsWith("https://") ||
-            !arrayInputs[i][5].value.startsWith("https://") ||
+            !arrayInputs[i][3].value.startsWith("http") ||
+            !arrayInputs[i][5].value.startsWith("http") ||
             !arrayInputs[i][1].value.startsWith("#") ||
             !(arrayInputs[i][1].value.length === 7)){
                 printTelaError();
@@ -244,7 +244,7 @@ function getPerguntas(){
                 }]
             });
         if(!(arrayInputs[i][6].value === "") &&
-            arrayInputs[i][7].value.startsWith("https://")){
+            arrayInputs[i][7].value.startsWith("http")){
                 meuQuizz.questions[i].answers.push({
                     text: arrayInputs[i][6].value,
                     image: arrayInputs[i][7].value,
@@ -252,7 +252,7 @@ function getPerguntas(){
                 });
             }
         if(!(arrayInputs[i][8].value === "") &&
-            arrayInputs[i][9].value.startsWith("https://")){
+            arrayInputs[i][9].value.startsWith("http")){
                 meuQuizz.questions[i].answers.push({
                         text: arrayInputs[i][8].value,
                         image: arrayInputs[i][9].value,
@@ -277,7 +277,7 @@ function getNiveis(){
         if(arrayInputsNiveis[i][0].value.length < 10 ||
             Number(arrayInputsNiveis[i][1].value) < 0 ||
             Number(arrayInputsNiveis[i][1].value) > 100 ||
-            !arrayInputsNiveis[i][2].value.startsWith("https://") ||
+            !arrayInputsNiveis[i][2].value.startsWith("http") ||
             arrayInputsNiveis[i][3].value.length < 30){
                 printTelaError();
                 return;
@@ -316,6 +316,7 @@ function sucessoDoQuizz(){
 
 function voltarHome(){
     telaAtual = trocarDeTela(0);
+    getQuizzes();
 }
 
 function enviarQuizz(){
@@ -325,11 +326,9 @@ function enviarQuizz(){
 }
 
 function tratarSucesso(resposta){
-    let id = JSON.stringify(resposta.data.id);
     sucessoDoQuizz();
-    console.log(resposta.data.id);
-    console.log(resposta.data);
-    localStorage.setItem(id, id);
+    getQuizzes();
+    sendStorage(resposta.data.id);
 }
 
 function tratarErro(resposta){
@@ -360,4 +359,16 @@ function verificaCor(str){
     return true;
 }
 
+function sendStorage(id){
+    let quizzesLocal = [];
+
+    if(localStorage.getItem("idsLocal") !== null) {
+        quizzesLocal = JSON.parse(localStorage.getItem("idsLocal"));
+    }
+
+    quizzesLocal.push(id);
+    localStorage.setItem("idsLocal" , JSON.stringify(quizzesLocal));
+}
+
+//enviarQuizz();
 trocarDeTela(0);

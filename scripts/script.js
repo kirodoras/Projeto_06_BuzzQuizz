@@ -15,16 +15,47 @@ function getQuizzes() {
 
 //Recebe um array de objetos "quiz" e adiciona todos no container especificado via parâmetro
 function preencheContainerDeQuiz(classeDoContainer, arrayDeQuizzes) {
-    console.log("eita")
+    let localTodos = document.querySelector(".todos-quizzes");
+    let localSeus = document.querySelector(".seus-quizzes");
+    let meusQuizzesId = [];
+    localSeus.innerHTML = "";
+    localTodos.innerHTML = "";
+    if(localStorage.getItem("idsLocal") !== null) {
+        meusQuizzesId = JSON.parse(localStorage.getItem("idsLocal"));
+    }
+    console.log(meusQuizzesId);
+
     for(let i=0;i<arrayDeQuizzes.length;i++) {
-        let container = document.querySelector(".todos-quizzes");
-        container.innerHTML += `<li class="quizz" id="${arrayDeQuizzes[i].id}" onclick="executaQuiz(${arrayDeQuizzes[i].id})">
+        if(meusQuizzesId.includes(arrayDeQuizzes[i].id)){
+            localSeus.innerHTML += `<li class="quizz" id="${arrayDeQuizzes[i].id}" onclick="executaQuiz(${arrayDeQuizzes[i].id})">
                                     <img src="${arrayDeQuizzes[i].image}">
                                     <div class="gradient"></div>
                                     <h3>${arrayDeQuizzes[i].title}</h3>
-                                </li>`
+                                </li>`;
+        }else {
+        localTodos.innerHTML += `<li class="quizz" id="${arrayDeQuizzes[i].id}" onclick="executaQuiz(${arrayDeQuizzes[i].id})">
+                                    <img src="${arrayDeQuizzes[i].image}">
+                                    <div class="gradient"></div>
+                                    <h3>${arrayDeQuizzes[i].title}</h3>
+                                </li>`;
+        }
+    }
+    trocaDeSection();
+}
+
+function trocaDeSection (){
+    let localSeus = document.querySelector(".seus-quizzes");
+    let localCriar = document.querySelector(".local-criar-quizz");
+
+    if(localSeus.innerHTML === ""){
+        localCriar.classList.remove('hidden');
+        localSeus.parentNode.classList.add('hidden');
+    }else {
+        localCriar.classList.add('hidden');
+        localSeus.parentNode.classList.remove('hidden');
     }
 }
 
+//localStorage.clear()
 getQuizzes();
 
