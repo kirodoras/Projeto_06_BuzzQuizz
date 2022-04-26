@@ -33,7 +33,7 @@ header {
 
     position: fixed;
     top: 0px;
-    /*z-index: 1;*/
+    z-index: 1;
 
     background-color: var(--cor-red);
     color: var(--cor-branco);
@@ -221,7 +221,6 @@ header h1 {
     position: absolute;
     top: 30px;
     right: 0px;
-    z-index: 1;
 
     background: #EC362D;
     border-radius: 10px 0px 0px 10px;

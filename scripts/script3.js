@@ -301,6 +301,7 @@ function sucessoDoQuizz(){
 }
 
 function voltarHome(){
+    window.scrollTo(0, 0);
     telaAtual = trocarDeTela(0);
     getQuizzes();
 }
