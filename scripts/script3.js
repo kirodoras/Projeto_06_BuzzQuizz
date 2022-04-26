@@ -8,7 +8,7 @@ let meuQuizz =
 
 let testeQuizz = {
 	title: "Título do quizz - ALoaloalo",
-	image: "https://http.cat/411.jpg",
+	image: "https://www.einerd.com.br/wp-content/uploads/2020/08/Avatar-A-Lenda-de-Korra-capa-890x466.jpg",
 	questions: [
 		{
 			title: "Título da pergunta 1",
@@ -118,19 +118,6 @@ function getInfosBasicas() {
     telaAtual = trocarDeTela(3);
     renderizarPerguntas();
     renderizarNiveis();
-}
-
-let telas = '';
-function trocarDeTela(screen){
-    telas = document.querySelectorAll('main');
-    
-    for(let i = 0; i < telas.length; i++){
-        telas[i].classList.add('hidden');
-    }
-
-    telas[screen].classList.remove('hidden');
-
-    return screen;
 }
 
 function openForm(elemento){
@@ -305,18 +292,23 @@ function getNiveis(){
 function sucessoDoQuizz(){
     const quizzFeito = document.querySelector('.quizz-feito');
 
-    if(telaAtual === 5) {
-        quizzFeito.innerHTML += `
-            <img src="${meuQuizz.image}" alt="">
-            <div class="gradient"></div>
-            <h3>${meuQuizz.title}</h3>
-        `;
-    }
+    quizzFeito.innerHTML += `
+        <img src="${meuQuizz.image}" alt="">
+        <div class="gradient"></div>
+        <h3>${meuQuizz.title}</h3>
+    `;
+
 }
 
 function voltarHome(){
+    window.scrollTo(0, 0);
     telaAtual = trocarDeTela(0);
     getQuizzes();
+}
+
+let id = 0;
+function acessarQuizz(){
+    if(id != 0) executaQuiz(id);
 }
 
 function enviarQuizz(){
@@ -329,6 +321,8 @@ function tratarSucesso(resposta){
     sucessoDoQuizz();
     getQuizzes();
     sendStorage(resposta.data.id);
+    sendKeyStorage(resposta.data.key);
+    id = resposta.data.id;
 }
 
 function tratarErro(resposta){
@@ -368,6 +362,17 @@ function sendStorage(id){
 
     quizzesLocal.push(id);
     localStorage.setItem("idsLocal" , JSON.stringify(quizzesLocal));
+}
+
+function sendKeyStorage(key){
+    let keysLocal = [];
+
+    if(localStorage.getItem("keysLocal") !== null) {
+        keysLocal = JSON.parse(localStorage.getItem("keysLocal"));
+    }
+
+    keysLocal.push(key);
+    localStorage.setItem("keysLocal" , JSON.stringify(keysLocal));
 }
 
 //enviarQuizz();
