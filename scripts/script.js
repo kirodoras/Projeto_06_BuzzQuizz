@@ -23,15 +23,17 @@ function preencheContainerDeQuiz(classeDoContainer, arrayDeQuizzes) {
     if(localStorage.getItem("idsLocal") !== null) {
         meusQuizzesId = JSON.parse(localStorage.getItem("idsLocal"));
     }
-    console.log(meusQuizzesId);
 
     for(let i=0;i<arrayDeQuizzes.length;i++) {
         if(meusQuizzesId.includes(arrayDeQuizzes[i].id)){
-            localSeus.innerHTML += `<li class="quizz" id="${arrayDeQuizzes[i].id}" onclick="executaQuiz(${arrayDeQuizzes[i].id})">
-                                    <img src="${arrayDeQuizzes[i].image}">
-                                    <div class="gradient"></div>
-                                    <h3>${arrayDeQuizzes[i].title}</h3>
-                                </li>`;
+            localSeus.innerHTML += `<div class="card">
+                                    <li class="quizz" id="${arrayDeQuizzes[i].id}" onclick="executaQuiz(${arrayDeQuizzes[i].id})">
+                                        <img src="${arrayDeQuizzes[i].image}">
+                                        <div class="gradient"></div>
+                                        <h3>${arrayDeQuizzes[i].title}</h3>
+                                    </li>
+                                    <div class="delete" onclick="remove(${arrayDeQuizzes[i].id})"><ion-icon name="trash-outline"></ion-icon></div>
+                                    </div>`;
         }else {
         localTodos.innerHTML += `<li class="quizz" id="${arrayDeQuizzes[i].id}" onclick="executaQuiz(${arrayDeQuizzes[i].id})">
                                     <img src="${arrayDeQuizzes[i].image}">
@@ -70,6 +72,33 @@ function trocarDeTela(screen){
     return screen;
 }
 
+function remove(id){
+    let meusQuizzesId = [];
+    let minhasKeys = [];
+    let key;
+    if(localStorage.getItem("idsLocal") !== null) {
+        meusQuizzesId = JSON.parse(localStorage.getItem("idsLocal"));
+    }
+    if(localStorage.getItem("keysLocal") !== null) {
+        minhasKeys = JSON.parse(localStorage.getItem("keysLocal"));
+    }
+    key = minhasKeys[meusQuizzesId.indexOf(id)];
+    console.log(key);
+    console.log(id);
+    if (key !== -1) {
+        axios.delete(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${id}`, { headers: { "Secret-Key": key } });
+    }else {
+        alert("Erro em excluir Quizz");
+    }
+    setTimeout(() => {
+        meusQuizzesId.splice(meusQuizzesId.indexOf(id), 1);
+        minhasKeys.splice(meusQuizzesId.indexOf(id), 1);
+
+        localStorage.setItem("idsLocal" , JSON.stringify(meusQuizzesId));
+        localStorage.setItem("keysLocal" , JSON.stringify(minhasKeys));
+        getQuizzes();
+    },250);
+}
 //localStorage.clear()
 getQuizzes();
 

@@ -8,7 +8,7 @@ let meuQuizz =
 
 let testeQuizz = {
 	title: "Título do quizz - ALoaloalo",
-	image: "https://http.cat/411.jpg",
+	image: "https://www.einerd.com.br/wp-content/uploads/2020/08/Avatar-A-Lenda-de-Korra-capa-890x466.jpg",
 	questions: [
 		{
 			title: "Título da pergunta 1",
@@ -320,6 +320,7 @@ function tratarSucesso(resposta){
     sucessoDoQuizz();
     getQuizzes();
     sendStorage(resposta.data.id);
+    sendKeyStorage(resposta.data.key);
     id = resposta.data.id;
 }
 
@@ -360,6 +361,17 @@ function sendStorage(id){
 
     quizzesLocal.push(id);
     localStorage.setItem("idsLocal" , JSON.stringify(quizzesLocal));
+}
+
+function sendKeyStorage(key){
+    let keysLocal = [];
+
+    if(localStorage.getItem("keysLocal") !== null) {
+        keysLocal = JSON.parse(localStorage.getItem("keysLocal"));
+    }
+
+    keysLocal.push(key);
+    localStorage.setItem("keysLocal" , JSON.stringify(keysLocal));
 }
 
 //enviarQuizz();
