@@ -30,10 +30,12 @@ function inserePerguntaNaTela(pergunta) {
     const alternativas = concatenaAlternativas(pergunta);
     const containerTela2 = document.querySelector(".tela-2");
     containerTela2.innerHTML += `<div class="perguntaQuiz">
-                                    <div class="enunciado" style="background-color:${pergunta.color}">
-                                        ${pergunta.title}
+                                    <div class="containerGrid">
+                                        <p class="enunciado" style="background-color:${pergunta.color}">
+                                            ${pergunta.title}
+                                        </p>
+                                        ${alternativas}
                                     </div>
-                                    ${alternativas}
                                 </div>`
 }
 
@@ -130,18 +132,20 @@ function imprimeResultadoQuiz() {
     const nivel = calculaNivel();
     const containerResultado = document.querySelector(".tela-2");
     containerResultado.innerHTML += `<div class="resultado">
-                                        <div class="mensagemPrincipal">
-                                            ${nivel.title}
+                                        <div class="containerGridResultado">
+                                            <div class="enunciado">
+                                                ${nivel.title}
+                                            </div>
+                                            <img src=${nivel.image}>
+                                            <h2>${nivel.text}</h2>
                                         </div>
-                                        <img src=${nivel.image}>
-                                        <h2>${nivel.text}</h2>
                                     </div>
-    <button type="button" class="main-button" onclick="executaQuiz(quizClicado.id)">Reiniciar Quizz</button>
-    <button type="button" class="go-home" onclick="voltarHome()">Voltar pra home</button>`
+                                    <button type="button" class="main-button" onclick="executaQuiz(quizClicado.id)">Reiniciar Quizz</button>
+                                    <button type="button" class="go-home" onclick="voltarHome()">Voltar pra home</button>`
 }
 
 function scrollAutomatico() {
-    const enunciados = document.querySelectorAll(".enunciado");
+    const enunciados = document.querySelectorAll(".perguntaQuiz");
     const numeroQuestoes = enunciados.length;
     if(contadorDeRespostasUsuario < numeroQuestoes) {
         enunciados[contadorDeRespostasUsuario].scrollIntoView({block: "center", behavior: "smooth"});
