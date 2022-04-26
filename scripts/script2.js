@@ -79,9 +79,9 @@ function highlightAlternativaSelecionada(alternativaClicada) {
 
 function retornaObjetoPergunta(alternativaClicada) {
     const divPergunta = alternativaClicada.parentNode;
+    const numDeAlternativas = divPergunta.querySelectorAll(".alternativa").length;
     const enunciado = divPergunta.querySelector(".enunciado").innerText;
-    const objetoPergunta = quizClicado.questions.find(elemento => elemento.title === enunciado);
-    console.log(objetoPergunta)
+    const objetoPergunta = quizClicado.questions.find(elemento => elemento.title === enunciado && elemento.answers.length === numDeAlternativas);
     return objetoPergunta;
 }
 
@@ -102,7 +102,6 @@ function checarSeJogoAcabou () {
     const numeroDePerguntasRespondidas = document.querySelectorAll(".respondida").length;
     const numeroTotalDePerguntas = quizClicado.questions.length;
     if(numeroDePerguntasRespondidas === numeroTotalDePerguntas) {
-        console.log("Acabou o jogo!");
         imprimeResultadoQuiz();
         return true;
     }
@@ -115,7 +114,6 @@ function calculaPontuacao() {
     const numeroAcertos = document.querySelectorAll(".selected.correct").length;
     const numeroQuestoes =  quizClicado.questions.length;
     const porcentagemAcertos = Math.ceil((numeroAcertos/numeroQuestoes)*100);
-    console.log(`${porcentagemAcertos}%`)
     return porcentagemAcertos;
 }
 
@@ -124,7 +122,6 @@ function calculaNivel() {
     const niveisConquistados = quizClicado.levels.filter(nivel => nivel.minValue <= pontuacao);
     const ordemDescrescente = niveisConquistados.sort((a,b) => b.minValue - a.minValue);
     const nivelMaximoAlcancado = ordemDescrescente[0];
-    console.log(nivelMaximoAlcancado);
     return nivelMaximoAlcancado;
 }
 
@@ -149,12 +146,10 @@ function scrollAutomatico() {
     const numeroQuestoes = enunciados.length;
     if(contadorDeRespostasUsuario < numeroQuestoes) {
         enunciados[contadorDeRespostasUsuario].scrollIntoView({block: "center", behavior: "smooth"});
-        console.log(`Indo para pergunta ${contadorDeRespostasUsuario}`)
         contadorDeRespostasUsuario++;
     }
     else if(contadorDeRespostasUsuario === enunciados.length) {
         const resultado = document.querySelector(".resultado");
-        console.log("scrollando para os resultados")
         resultado.scrollIntoView({block: "center", behavior: "smooth"});
     }
 }
