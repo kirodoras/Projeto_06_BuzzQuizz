@@ -1,6 +1,6 @@
-# Projeto_06_BuzzQuizz
+# BuzzQuizz
 Projeto 6 - Driven
-Github Pages - https://kirodoras.github.io/Projeto_06_BuzzQuizz/
+Github Pages - https://kirodoras.github.io/buzz-quizz/
 Sexto projeto - [Driven](https://www.driven.com.br/)
 
 Collaborators:
